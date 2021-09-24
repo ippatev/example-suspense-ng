@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HelloWorldService } from './hello-world.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { HelloWorldService } from './hello-world.service';
 })
 export class HelloWorldComponent implements OnInit {
   constructor(private helloWorldService: HelloWorldService) {}
-  public msg = this.helloWorldService.getMsg();
+  public posts$: Observable<any> | undefined = undefined;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.posts$ = this.helloWorldService.getPosts();
+  }
 }
